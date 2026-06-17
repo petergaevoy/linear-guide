@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linear — гайд для команды</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg-secondary: #f7f7f5;
+    --bg-tertiary: #f1efea;
+    --text: #1a1a18;
+    --text-secondary: #5c5c58;
+    --text-tertiary: #9c9c96;
+    --border: rgba(0,0,0,0.1);
+    --border-medium: rgba(0,0,0,0.18);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --warning-bg: #FAEEDA;
+    --warning-text: #633806;
+    --warning-border: #EF9F27;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1c1a;
+      --bg-secondary: #252522;
+      --bg-tertiary: #2e2e2b;
+      --text: #f0efe8;
+      --text-secondary: #a8a8a0;
+      --text-tertiary: #6a6a64;
+      --border: rgba(255,255,255,0.1);
+      --border-medium: rgba(255,255,255,0.18);
+      --warning-bg: #2e2310;
+      --warning-text: #FAC775;
+      --warning-border: #854F0B;
+    }
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg-tertiary);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+  }
+
+  .container {
+    max-width: 760px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .page-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 1.5rem;
+    border-bottom: 0.5px solid var(--border-medium);
+  }
+
+  .page-header-icon {
+    width: 44px;
+    height: 44px;
+    background: #EEEDFE;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: #534AB7;
+    flex-shrink: 0;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .page-header-icon { background: #26215C; color: #CECBF6; }
+  }
+
+  .page-header h1 { font-size: 22px; font-weight: 500; }
+  .page-header p { font-size: 14px; color: var(--text-secondary); margin-top: 2px; }
+
+  .section-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.75rem;
+  }
+
+  .card {
+    background: var(--bg);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1rem 1.25rem;
+  }
+
+  .hero-banner {
+    background: var(--bg-secondary);
+    border-left: 3px solid #7F77DD;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    padding: 1rem 1.25rem;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .hero-banner i { font-size: 20px; color: #7F77DD; margin-top: 2px; flex-shrink: 0; }
+  .hero-banner h2 { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+  .hero-banner p { font-size: 14px; color: var(--text-secondary); }
+
+  /* Flowchart */
+  .flowchart {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .fc-pipeline {
+    background: var(--bg-secondary);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 10px 12px;
+  }
+
+  .fc-pipeline-label {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+
+  .fc-chips {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    row-gap: 6px;
+  }
+
+  .flow-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 9px;
+    border-radius: 20px;
+    background: var(--bg);
+    border: 0.5px solid var(--border-medium);
+    color: var(--text-secondary);
+    flex-shrink: 0;
+  }
+
+  .flow-arrow {
+    color: var(--text-tertiary);
+    font-size: 13px;
+    padding: 0 4px;
+    flex-shrink: 0;
+  }
+
+  .fc-fixes-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: 10px 14px;
+    background: var(--warning-bg);
+    border: 0.5px solid var(--warning-border);
+    border-radius: var(--radius-md);
+  }
+
+  .fc-section-label {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--warning-text);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.6;
+    margin-right: 2px;
+    align-self: center;
+  }
+
+  .fc-sources {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .fc-source {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 20px;
+    border: 0.5px solid var(--warning-border);
+    color: var(--warning-text);
+    white-space: nowrap;
+    opacity: 0.75;
+  }
+
+  .fc-arrow-warn {
+    color: var(--warning-text);
+    font-size: 15px;
+    flex-shrink: 0;
+    opacity: 0.5;
+  }
+
+  .fc-fixes-node {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 14px;
+    border-radius: var(--radius-md);
+    background: var(--warning-border);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    flex-shrink: 0;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .fc-fixes-node { background: #9A5B0A; }
+  }
+
+  .fc-target {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 20px;
+    border: 0.5px solid var(--warning-border);
+    color: var(--warning-text);
+    white-space: nowrap;
+    opacity: 0.75;
+  }
+
+  .flow-exits {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .flow-exits-label {
+    font-size: 11px;
+    color: var(--text-tertiary);
+  }
+
+  .flow-exit-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 9px;
+    border-radius: 20px;
+    background: transparent;
+    border: 0.5px dashed var(--border-medium);
+    color: var(--text-tertiary);
+  }
+
+  /* Status grid */
+  .status-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+    gap: 8px;
+  }
+
+  .status-item {
+    background: var(--bg);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 9px 11px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .status-header {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 3px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .status-name { font-size: 13px; font-weight: 700; letter-spacing: -0.01em; }
+  .status-desc {
+    font-size: 11.5px;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    text-align: left;
+    background: var(--bg-secondary);
+    border-radius: 4px;
+    padding: 4px 6px;
+    margin-top: 4px;
+    display: block;
+    flex: 1;
+  }
+
+  .alert {
+    background: var(--warning-bg);
+    border: 0.5px solid var(--warning-border);
+    border-radius: var(--radius-md);
+    padding: 10px 14px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-top: 10px;
+  }
+
+  .alert i { font-size: 18px; color: var(--warning-text); flex-shrink: 0; margin-top: 1px; }
+  .alert p { font-size: 13px; color: var(--warning-text); line-height: 1.5; }
+  .alert strong { font-weight: 500; }
+
+  /* Labels */
+  .label-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  @media (max-width: 480px) {
+    .label-grid { grid-template-columns: 1fr; }
+    .status-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .label-group {
+    background: var(--bg);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 10px 12px;
+  }
+
+  .label-group-title {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .label-group-title i { font-size: 14px; }
+
+  .label-note {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    margin-top: 8px;
+    line-height: 1.4;
+  }
+
+  .pills { display: flex; flex-wrap: wrap; gap: 4px; }
+
+  .pill {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 9px;
+    border-radius: 20px;
+  }
+
+  .pill-purple { background: #EEEDFE; color: #3C3489; }
+  .pill-teal   { background: #E1F5EE; color: #085041; }
+  .pill-blue   { background: #E6F1FB; color: #0C447C; }
+  .pill-amber  { background: #FAEEDA; color: #633806; }
+
+  @media (prefers-color-scheme: dark) {
+    .pill-purple { background: #26215C; color: #CECBF6; }
+    .pill-teal   { background: #04342C; color: #9FE1CB; }
+    .pill-blue   { background: #042C53; color: #B5D4F4; }
+    .pill-amber  { background: #412402; color: #FAC775; }
+  }
+
+  .rule-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    padding: 6px 0;
+  }
+
+  .rule-item + .rule-item { border-top: 0.5px solid var(--border); }
+  .rule-item i { font-size: 16px; margin-top: 1px; flex-shrink: 0; }
+  .rule-item strong { color: var(--text); font-weight: 500; }
+
+  /* Story Points */
+  .points-table {
+    background: var(--bg);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .pt-row {
+    display: grid;
+    grid-template-columns: 32px 80px 1fr;
+    align-items: center;
+    padding: 8px 14px;
+    border-bottom: 0.5px solid var(--border);
+    gap: 0;
+  }
+
+  .pt-row:last-child { border-bottom: none; }
+
+  .pt-num {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .pt-days {
+    font-size: 12px;
+    color: var(--text-tertiary);
+  }
+
+  .pt-ex {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+  }
+
+  /* Hierarchy */
+  .hierarchy { display: flex; flex-direction: column; gap: 4px; }
+
+  .h-row { display: flex; align-items: stretch; }
+
+  .h-indent { width: 20px; display: flex; justify-content: center; flex-shrink: 0; }
+  .h-line { width: 1px; background: var(--border-medium); }
+
+  .h-node {
+    flex: 1;
+    background: var(--bg);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 9px 12px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin: 2px 0;
+  }
+
+  .h-node.lvl0 { background: #EEEDFE; border-color: #AFA9EC; }
+  .h-node.lvl1 { background: #E1F5EE; border-color: #5DCAA5; }
+
+  @media (prefers-color-scheme: dark) {
+    .h-node.lvl0 { background: #26215C; border-color: #534AB7; }
+    .h-node.lvl1 { background: #04342C; border-color: #1D9E75; }
+  }
+
+  .h-icon { font-size: 16px; flex-shrink: 0; }
+  .h-name { font-size: 13px; font-weight: 500; }
+  .h-sub  { font-size: 11px; color: var(--text-tertiary); margin-top: 1px; }
+  .h-name.lvl0 { color: #3C3489; }
+  .h-name.lvl1 { color: #0F6E56; }
+
+  @media (prefers-color-scheme: dark) {
+    .h-name.lvl0 { color: #CECBF6; }
+    .h-name.lvl1 { color: #9FE1CB; }
+  }
+
+  .badge {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .badge-why  { background: #FAEEDA; color: #633806; }
+  .badge-what { background: #E1F5EE; color: #085041; }
+  .badge-how  { background: #E6F1FB; color: #0C447C; }
+
+  @media (prefers-color-scheme: dark) {
+    .badge-why  { background: #412402; color: #FAC775; }
+    .badge-what { background: #04342C; color: #9FE1CB; }
+    .badge-how  { background: #042C53; color: #B5D4F4; }
+  }
+
+  /* Prefixes */
+  .prefix-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    background: var(--bg);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-top: 6px;
+  }
+
+  .prefix-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 14px;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .prefix-row:last-child { border-bottom: none; }
+
+  .tag {
+    font-size: 12px;
+    font-family: ui-monospace, 'SF Mono', monospace;
+    padding: 3px 10px;
+    border-radius: var(--radius-md);
+    background: var(--bg-secondary);
+    border: 0.5px solid var(--border-medium);
+    color: var(--text-secondary);
+    flex-shrink: 0;
+    min-width: 80px;
+    text-align: center;
+  }
+
+  .prefix-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <header class="page-header">
+    <div class="page-header-icon">
+      <i class="ti ti-layout-kanban"></i>
+    </div>
+    <div>
+      <h1>Linear — гайд для команды</h1>
+      <p>Инструмент управления задачами.</p>
+    </div>
+  </header>
+
+  <div>
+    <div class="hero-banner">
+      <i class="ti ti-info-circle"></i>
+      <div style="flex:1">
+        <h2 style="margin-bottom:10px">Как мы работаем</h2>
+        <div class="rule-item">
+          <i class="ti ti-layout-kanban" style="color:#7F77DD"></i>
+          <span>Все задачи фиксируются в <strong>Linear</strong>: статусы, ответственность, релизы. <strong><br>Нет задачи в Linear — задачи не существует.</strong></span>
+        </div>
+        <div class="rule-item">
+          <i class="ti ti-message-circle" style="color:#7F77DD"></i>
+          <span>Обсуждения — в <strong>комментариях таски</strong>, не в мессенджерах.</span>
+        </div>
+        <div class="rule-item">
+          <i class="ti ti-user-check" style="color:#7F77DD"></i>
+          <span><strong>Assignee</strong> — тот, кто держит мяч прямо сейчас.<br>При смене статуса <strong>передай задачу следующему</strong>: смени Assignee на того, кто будет ею заниматься дальше — она сразу появится у него в списке задач и он увидит, что мяч на его стороне.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <p class="section-label">Статусы задачи</p>
+
+    <!-- Flowchart -->
+    <div class="flowchart">
+
+      <div class="fc-pipeline">
+        <p class="fc-pipeline-label">Основной поток</p>
+        <div class="fc-chips">
+          <span class="flow-chip"><span class="dot" style="background:#B4B2A9"></span>Draft</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-chip"><span class="dot" style="background:#888780"></span>Backlog</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-chip"><span class="dot" style="background:#378ADD"></span>Todo</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-chip"><span class="dot" style="background:#7F77DD"></span>In Progress</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-chip"><span class="dot" style="background:#1D9E75"></span>Ready for Review</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-chip"><span class="dot" style="background:#8B81E8"></span>In Review</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-chip"><span class="dot" style="background:#639922"></span>Ready for Testing</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-chip"><span class="dot" style="background:#3DAF7A"></span>In Testing</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-chip"><span class="dot" style="background:#5BA3D9"></span>Ready for Regress</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-chip"><span class="dot" style="background:#3A87C4"></span>In Regression</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-chip"><span class="dot" style="background:#5DCAA5"></span>Ready for Deploy</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-chip"><span class="dot" style="background:#639922"></span>Done</span>
+        </div>
+      </div>
+
+      <div class="fc-fixes-section">
+        <span class="fc-section-label">Возврат</span>
+        <div class="fc-sources">
+          <span class="fc-source"><span class="dot" style="background:#8B81E8"></span>In Review</span>
+          <span class="fc-source"><span class="dot" style="background:#3DAF7A"></span>In Testing</span>
+        </div>
+        <span class="fc-arrow-warn">→</span>
+        <div class="fc-fixes-node">
+          <span class="dot" style="background:#fff; opacity:0.6"></span>
+          Fixes Required
+        </div>
+        <span class="fc-arrow-warn">→</span>
+        <span class="fc-target"><span class="dot" style="background:#1D9E75"></span>Ready for Review</span>
+      </div>
+
+      <div class="flow-exits">
+        <span class="flow-exits-label">Выходы из потока:</span>
+        <span class="flow-exit-chip"><span class="dot" style="background:#E24B4A"></span>Blocked</span>
+        <span class="flow-exit-chip"><span class="dot" style="background:#B4B2A9"></span>Canceled</span>
+      </div>
+
+    </div>
+
+    <div class="status-grid">
+      <div class="status-item">
+        <div class="status-header"><div class="dot" style="background:#B4B2A9"></div><span class="status-name">Draft</span></div>
+        <span class="status-desc">Черновик, ещё нет описания для работы</span>
+      </div>
+      <div class="status-item">
+        <div class="status-header"><div class="dot" style="background:#888780"></div><span class="status-name">Backlog</span></div>
+        <span class="status-desc">Описание готово, можно брать в работу</span>
+      </div>
+      <div class="status-item">
+        <div class="status-header"><div class="dot" style="background:#378ADD"></div><span class="status-name">Todo</span></div>
+        <span class="status-desc">Запланировано в текущий спринт</span>
+      </div>
+      <div class="status-item">
+        <div class="status-header"><div class="dot" style="background:#7F77DD"></div><span class="status-name">In Progress</span></div>
+        <span class="status-desc">Разработчик работает над задачей</span>
+      </div>
+      <div class="status-item" style="border-color: #EF9F27;">
+        <div class="status-header"><div class="dot" style="background:#EF9F27"></div><span class="status-name">Fixes Required</span></div>
+        <span class="status-desc">Найдены ошибки, нужен возврат в работу</span>
+      </div>
+      <div class="status-item">
+        <div class="status-header"><div class="dot" style="background:#1D9E75"></div><span class="status-name">Ready for Review</span></div>
+        <span class="status-desc">Ждёт код-ревью, смени Assignee на ревьюера</span>
+      </div>
+      <div class="status-item">
+        <div class="status-header"><div class="dot" style="background:#8B81E8"></div><span class="status-name">In Review</span></div>
+        <span class="status-desc">Ревьюер изучает код, ждём фидбека</span>
+      </div>
+      <div class="status-item">
+        <div class="status-header"><div class="dot" style="background:#639922"></div><span class="status-name">Ready for Testing</span></div>
+        <span class="status-desc">Передано QA, ожидает тестирования</span>
+      </div>
+      <div class="status-item">
+        <div class="status-header"><div class="dot" style="background:#3DAF7A"></div><span class="status-name">In Testing</span></div>
+        <span class="status-desc">QA проводит тестирование прямо сейчас</span>
+      </div>
+      <div class="status-item">
+        <div class="status-header"><div class="dot" style="background:#5BA3D9"></div><span class="status-name">Ready for Regress</span></div>
+        <span class="status-desc">Ждёт регрессионного тестирования</span>
+      </div>
+      <div class="status-item">
+        <div class="status-header"><div class="dot" style="background:#3A87C4"></div><span class="status-name">In Regression</span></div>
+        <span class="status-desc">QA проводит регресс прямо сейчас</span>
+      </div>
+      <div class="status-item">
+        <div class="status-header"><div class="dot" style="background:#5DCAA5"></div><span class="status-name">Ready for Deploy</span></div>
+        <span class="status-desc">Всё проверено, готово к деплою на прод</span>
+      </div>
+      <div class="status-item">
+        <div class="status-header"><div class="dot" style="background:#639922"></div><span class="status-name">Done</span></div>
+        <span class="status-desc">Завершена и задеплоена на продакшен</span>
+      </div>
+      <div class="status-item">
+        <div class="status-header"><div class="dot" style="background:#E24B4A"></div><span class="status-name">Blocked</span></div>
+        <span class="status-desc">Нельзя продолжить, зафикси причину и сообщи тимлиду</span>
+      </div>
+      <div class="status-item">
+        <div class="status-header"><div class="dot" style="background:#B4B2A9"></div><span class="status-name">Canceled</span></div>
+        <span class="status-desc">Задача закрыта и больше не актуальна</span>
+      </div>
+    </div>
+
+    <div class="alert">
+      <i class="ti ti-alert-triangle"></i>
+      <p><strong>Fixes Required — высокий приоритет</strong> —тепе брать в работу в первую очередь! <br>Количество возвратов и время в этом статусе влияют на Performance Review.</p>
+    </div>
+  </div>
+
+  <div>
+    <p class="section-label">Метки (Labels)</p>
+    <div class="label-grid">
+      <div class="label-group">
+        <div class="label-group-title"><i class="ti ti-layout-grid"></i> Stream — продукт/команда</div>
+        <div class="pills">
+          <span class="pill pill-purple">Admin</span>
+          <span class="pill pill-purple">App</span>
+          <span class="pill pill-purple">Core Processing</span>
+          <span class="pill pill-purple">DevOps</span>
+          <span class="pill pill-purple">Landing Page</span>
+          <span class="pill pill-purple">Payment Page</span>
+          <span class="pill pill-purple">Product Office</span>
+          <span class="pill pill-purple">QA</span>
+        </div>
+      </div>
+      <div class="label-group">
+        <div class="label-group-title"><i class="ti ti-tag"></i> Type — тип задачи</div>
+        <div class="pills">
+          <span class="pill pill-teal">Feature</span>
+          <span class="pill pill-teal">Bug</span>
+          <span class="pill pill-teal">User Story</span>
+          <span class="pill pill-teal">Research</span>
+          <span class="pill pill-teal">Incorrect TX & Balance</span>
+        </div>
+      </div>
+      <div class="label-group">
+        <div class="label-group-title"><i class="ti ti-users"></i> Участники</div>
+        <div class="pills">
+          <span class="pill pill-blue">Owner</span>
+          <span class="pill pill-blue">Code Reviewer</span>
+          <span class="pill pill-blue">QA</span>
+        </div>
+        <p class="label-note">Ставь метку чтобы было видно кто вовлечён помимо текущего Assignee</p>
+      </div>
+      <div class="label-group">
+        <div class="label-group-title"><i class="ti ti-rocket"></i> Release</div>
+        <div class="pills">
+          <span class="pill pill-amber">Release v0.3</span>
+          <span class="pill pill-amber">Release v0.4</span>
+          <span class="pill pill-amber">Release v0.5</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <p class="section-label">Story Points</p>
+    <div class="points-table">
+      <div class="pt-row">
+        <div class="pt-num">0</div>
+        <div class="pt-days">—</div>
+        <div class="pt-ex">User Story — только описание, без разработки</div>
+      </div>
+      <div class="pt-row">
+        <div class="pt-num">1</div>
+        <div class="pt-days">1 день</div>
+        <div class="pt-ex">Мелкий баг, правка текста или конфига</div>
+      </div>
+      <div class="pt-row">
+        <div class="pt-num">2</div>
+        <div class="pt-days">2 дня</div>
+        <div class="pt-ex">Небольшая фича, правка одного компонента</div>
+      </div>
+      <div class="pt-row">
+        <div class="pt-num">3</div>
+        <div class="pt-days">3 дня</div>
+        <div class="pt-ex">Средняя задача, затрагивает несколько файлов</div>
+      </div>
+      <div class="pt-row">
+        <div class="pt-num">4</div>
+        <div class="pt-days">4 дня</div>
+        <div class="pt-ex">Сложная фича, много зависимостей или интеграций</div>
+      </div>
+      <div class="pt-row">
+        <div class="pt-num">5</div>
+        <div class="pt-days">5 дней</div>
+        <div class="pt-ex">Большая задача — реши, можно ли разбить на части</div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <p class="section-label">Иерархия проектов</p>
+    <div class="hierarchy">
+      <div class="h-row">
+        <div class="h-node lvl0">
+          <i class="ti ti-flag h-icon" style="color:#534AB7"></i>
+          <div>
+            <div class="h-name lvl0">Initiative</div>
+            <div class="h-sub">Стратегическая цель, квартальное планирование</div>
+          </div>
+          <span class="badge badge-why">WHY</span>
+        </div>
+      </div>
+      <div class="h-row">
+        <div class="h-indent"><div class="h-line"></div></div>
+        <div class="h-node lvl1">
+          <i class="ti ti-folder h-icon" style="color:#0F6E56"></i>
+          <div>
+            <div class="h-name lvl1">Project</div>
+            <div class="h-sub">Epic — набор задач с результатом, несколько спринтов</div>
+          </div>
+          <span class="badge badge-what">WHAT</span>
+        </div>
+      </div>
+      <div class="h-row">
+        <div class="h-indent"></div>
+        <div class="h-indent"><div class="h-line"></div></div>
+        <div class="h-node">
+          <i class="ti ti-checkbox h-icon" style="color:var(--text-secondary)"></i>
+          <div>
+            <div class="h-name">Issue</div>
+            <div class="h-sub">Конкретная задача в работе</div>
+          </div>
+          <span class="badge badge-how">HOW</span>
+        </div>
+      </div>
+      <div class="h-row">
+        <div class="h-indent"></div>
+        <div class="h-indent"></div>
+        <div class="h-indent"><div class="h-line"></div></div>
+        <div class="h-node" style="background:var(--bg-secondary)">
+          <i class="ti ti-corner-down-right h-icon" style="color:var(--text-tertiary); font-size:14px"></i>
+          <div>
+            <div class="h-name" style="color:var(--text-secondary)">Sub-issue</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <p class="section-label">Префиксы заголовков задач</p>
+    <div class="prefix-list">
+      <div class="prefix-row">
+        <span class="tag">[FE]</span>
+        <span class="prefix-desc">Frontend — задача на стороне клиента</span>
+      </div>
+      <div class="prefix-row">
+        <span class="tag">[BE]</span>
+        <span class="prefix-desc">Backend — задача на стороне сервера</span>
+      </div>
+      <div class="prefix-row">
+        <span class="tag">[design]</span>
+        <span class="prefix-desc">Дизайн — макеты, UI-правки, визуальная часть</span>
+      </div>
+      <div class="prefix-row">
+        <span class="tag">[research]</span>
+        <span class="prefix-desc">Исследование — анализ, изучение технологии или подхода</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
