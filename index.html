@@ -333,13 +333,12 @@
 
   /* Labels */
   .label-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 8px;
   }
 
   @media (max-width: 480px) {
-    .label-grid { grid-template-columns: 1fr; }
     .status-grid { grid-template-columns: 1fr 1fr; }
   }
 
@@ -347,35 +346,45 @@
     background: var(--bg);
     border: 0.5px solid var(--border);
     border-radius: var(--radius-md);
-    padding: 10px 12px;
+    overflow: hidden;
   }
 
   .label-group-title {
     font-size: 12px;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--text-secondary);
-    margin-bottom: 8px;
+    padding: 9px 12px;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
+    border-bottom: 0.5px solid var(--border);
+    background: var(--bg-secondary);
   }
 
   .label-group-title i { font-size: 14px; }
 
-  .label-note {
-    font-size: 11px;
-    color: var(--text-tertiary);
-    margin-top: 8px;
-    line-height: 1.4;
+  .label-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 7px 12px;
+    border-bottom: 0.5px solid var(--border);
   }
 
-  .pills { display: flex; flex-wrap: wrap; gap: 4px; }
+  .label-row:last-child { border-bottom: none; }
+
+  .label-desc {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+  }
 
   .pill {
     font-size: 11px;
     font-weight: 500;
     padding: 2px 9px;
     border-radius: 20px;
+    flex-shrink: 0;
+    white-space: nowrap;
   }
 
   .pill-purple { background: #EEEDFE; color: #3C3489; }
@@ -696,53 +705,51 @@
 
     <div class="alert">
       <i class="ti ti-alert-triangle"></i>
-      <p><strong>Fixes Required — высокий приоритет</strong> —тепе брать в работу в первую очередь! <br>Количество возвратов и время в этом статусе влияют на Performance Review.</p>
+      <p><strong>Fixes Required — высокий приоритет</strong> — брать в работу в первую очередь! <br>Количество возвратов и время в этом статусе влияют на Performance Review.</p>
     </div>
   </div>
 
   <div>
     <p class="section-label">Метки (Labels)</p>
     <div class="label-grid">
+
       <div class="label-group">
-        <div class="label-group-title"><i class="ti ti-layout-grid"></i> Stream — продукт/команда</div>
-        <div class="pills">
-          <span class="pill pill-purple">Admin</span>
-          <span class="pill pill-purple">App</span>
-          <span class="pill pill-purple">Core Processing</span>
-          <span class="pill pill-purple">DevOps</span>
-          <span class="pill pill-purple">Landing Page</span>
-          <span class="pill pill-purple">Payment Page</span>
-          <span class="pill pill-purple">Product Office</span>
-          <span class="pill pill-purple">QA</span>
-        </div>
+        <div class="label-group-title"><i class="ti ti-layout-grid"></i> Stream — к какому продукту или команде относится задача</div>
+        <div class="label-row"><span class="pill pill-purple">Admin</span><span class="label-desc">Административный продукт</span></div>
+        <div class="label-row"><span class="pill pill-purple">App</span><span class="label-desc">Мобильное или веб-приложение</span></div>
+        <div class="label-row"><span class="pill pill-purple">Core Processing</span><span class="label-desc">Бэкенд-процессинг и бизнес-логика</span></div>
+        <div class="label-row"><span class="pill pill-purple">DevOps</span><span class="label-desc">Инфраструктура, деплой, мониторинг</span></div>
+        <div class="label-row"><span class="pill pill-purple">Landing Page</span><span class="label-desc">Маркетинговый лендинг</span></div>
+        <div class="label-row"><span class="pill pill-purple">Payment Page</span><span class="label-desc">Страница оплаты</span></div>
+        <div class="label-row"><span class="pill pill-purple">Product Office</span><span class="label-desc">Продуктовые и менеджерские задачи</span></div>
+        <div class="label-row"><span class="pill pill-purple">QA</span><span class="label-desc">Задачи команды тестирования</span></div>
+        <div class="label-row"><span class="pill pill-purple">Risk check</span><span class="label-desc">Проверка рисков</span></div>
       </div>
+
       <div class="label-group">
-        <div class="label-group-title"><i class="ti ti-tag"></i> Type — тип задачи</div>
-        <div class="pills">
-          <span class="pill pill-teal">Feature</span>
-          <span class="pill pill-teal">Bug</span>
-          <span class="pill pill-teal">User Story</span>
-          <span class="pill pill-teal">Research</span>
-          <span class="pill pill-teal">Incorrect TX & Balance</span>
-        </div>
+        <div class="label-group-title"><i class="ti ti-tag"></i> Type — что именно делаем</div>
+        <div class="label-row"><span class="pill pill-teal">Feature</span><span class="label-desc">Новая функциональность</span></div>
+        <div class="label-row"><span class="pill pill-teal">Bug</span><span class="label-desc">Ошибка в работе системы</span></div>
+        <div class="label-row"><span class="pill pill-teal">User Story</span><span class="label-desc">Описание без разработки, Story Points = 0</span></div>
+        <div class="label-row"><span class="pill pill-teal">Research</span><span class="label-desc">Исследование или анализ подхода</span></div>
+        <div class="label-row"><span class="pill pill-teal">Incorrect TX & Balance</span><span class="label-desc">Проблемы с транзакциями и балансом</span></div>
+        <div class="label-row"><span class="pill pill-teal">Testing</span><span class="label-desc">Задачи связанные с тестированием</span></div>
       </div>
+
       <div class="label-group">
-        <div class="label-group-title"><i class="ti ti-users"></i> Участники</div>
-        <div class="pills">
-          <span class="pill pill-blue">Owner</span>
-          <span class="pill pill-blue">Code Reviewer</span>
-          <span class="pill pill-blue">QA</span>
-        </div>
-        <p class="label-note">Ставь метку чтобы было видно кто вовлечён помимо текущего Assignee</p>
+        <div class="label-group-title"><i class="ti ti-users"></i> Участники — выбираем конкретных людей, вовлечённых в задачу</div>
+        <div class="label-row"><span class="pill pill-blue">Owner</span><span class="label-desc">Владелец и инициатор задачи</span></div>
+        <div class="label-row"><span class="pill pill-blue">Code Reviewer</span><span class="label-desc">Проводит код-ревью</span></div>
+        <div class="label-row"><span class="pill pill-blue">QA</span><span class="label-desc">Тестирует задачу</span></div>
       </div>
+
       <div class="label-group">
-        <div class="label-group-title"><i class="ti ti-rocket"></i> Release</div>
-        <div class="pills">
-          <span class="pill pill-amber">Release v0.3</span>
-          <span class="pill pill-amber">Release v0.4</span>
-          <span class="pill pill-amber">Release v0.5</span>
-        </div>
+        <div class="label-group-title"><i class="ti ti-rocket"></i> Release — к какому релизу привязана задача</div>
+        <div class="label-row"><span class="pill pill-amber">Release v0.3</span><span class="label-desc">Задачи третьего релиза</span></div>
+        <div class="label-row"><span class="pill pill-amber">Release v0.4</span><span class="label-desc">Задачи четвёртого релиза</span></div>
+        <div class="label-row"><span class="pill pill-amber">Release v0.5</span><span class="label-desc">Задачи пятого релиза</span></div>
       </div>
+
     </div>
   </div>
 
