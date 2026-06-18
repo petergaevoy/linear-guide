@@ -115,137 +115,50 @@
   .hero-banner h2 { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
   .hero-banner p { font-size: 14px; color: var(--text-secondary); }
 
-  /* Flowchart */
-  .flowchart {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 14px;
-  }
-
-  .fc-pipeline {
-    background: var(--bg-secondary);
-    border: 0.5px solid var(--border);
-    border-radius: var(--radius-md);
-    padding: 10px 12px;
-  }
-
-  .fc-pipeline-label {
-    font-size: 10px;
-    font-weight: 500;
-    color: var(--text-tertiary);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 8px;
-  }
-
-  .fc-chips {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    row-gap: 6px;
-  }
-
-  .flow-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 11px;
-    font-weight: 500;
-    padding: 4px 9px;
-    border-radius: 20px;
+  /* Mermaid flowchart */
+  .mermaid-wrap {
     background: var(--bg);
-    border: 0.5px solid var(--border-medium);
-    color: var(--text-secondary);
-    flex-shrink: 0;
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem 1.25rem 1.25rem;
+    overflow-x: auto;
+    margin-bottom: 10px;
   }
-
-  .flow-arrow {
-    color: var(--text-tertiary);
-    font-size: 13px;
-    padding: 0 4px;
-    flex-shrink: 0;
+  .mermaid-wrap svg { display: block; margin: 0 auto; max-width: 100%; height: auto; }
+  .mermaid-wrap .nodeLabel {
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-align: center !important;
+    width: 100% !important;
   }
-
-  .fc-fixes-section {
+  .mermaid-wrap .nodeLabel p {
+    text-align: center !important;
+    margin: 0 !important;
+  }
+  .return-note {
     display: flex;
     align-items: center;
-    gap: 10px;
     flex-wrap: wrap;
-    padding: 10px 14px;
+    gap: 6px;
+    padding: 9px 14px;
     background: var(--warning-bg);
     border: 0.5px solid var(--warning-border);
     border-radius: var(--radius-md);
-  }
-
-  .fc-section-label {
-    font-size: 10px;
-    font-weight: 500;
+    font-size: 12.5px;
     color: var(--warning-text);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    opacity: 0.6;
-    margin-right: 2px;
-    align-self: center;
+    margin-bottom: 8px;
   }
-
-  .fc-sources {
-    display: flex;
-    flex-direction: column;
+  .return-note strong { font-weight: 700; }
+  .return-note .chip {
+    display: inline-flex;
+    align-items: center;
     gap: 4px;
-  }
-
-  .fc-source {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 11px;
-    font-weight: 500;
-    padding: 2px 8px;
+    padding: 1px 7px;
     border-radius: 20px;
     border: 0.5px solid var(--warning-border);
-    color: var(--warning-text);
-    white-space: nowrap;
-    opacity: 0.75;
-  }
-
-  .fc-arrow-warn {
-    color: var(--warning-text);
-    font-size: 15px;
-    flex-shrink: 0;
-    opacity: 0.5;
-  }
-
-  .fc-fixes-node {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    padding: 6px 14px;
-    border-radius: var(--radius-md);
-    background: var(--warning-border);
-    color: #fff;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    flex-shrink: 0;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .fc-fixes-node { background: #9A5B0A; }
-  }
-
-  .fc-target {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 11px;
     font-weight: 500;
-    padding: 2px 8px;
-    border-radius: 20px;
-    border: 0.5px solid var(--warning-border);
-    color: var(--warning-text);
-    white-space: nowrap;
-    opacity: 0.75;
+    font-size: 11.5px;
+    opacity: 0.85;
   }
 
   .flow-exits {
@@ -331,6 +244,32 @@
   .alert p { font-size: 13px; color: var(--warning-text); line-height: 1.5; }
   .alert strong { font-weight: 500; }
 
+  .tip {
+    background: #E6F1FB;
+    border: 0.5px solid #7AB8EC;
+    border-radius: var(--radius-md);
+    padding: 10px 14px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-top: 10px;
+  }
+  .tip i { font-size: 18px; color: #0C447C; flex-shrink: 0; margin-top: 1px; }
+  .tip p { font-size: 13px; color: #0C447C; line-height: 1.5; }
+  .tip strong { font-weight: 500; }
+  .tip code {
+    font-family: ui-monospace, 'SF Mono', monospace;
+    font-size: 12px;
+    background: rgba(12,68,124,0.1);
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+  @media (prefers-color-scheme: dark) {
+    .tip { background: #042C53; border-color: #1A5A9A; }
+    .tip i, .tip p { color: #B5D4F4; }
+    .tip code { background: rgba(181,212,244,0.12); }
+  }
+
   /* Labels */
   .label-grid {
     display: flex;
@@ -362,6 +301,27 @@
   }
 
   .label-group-title i { font-size: 14px; }
+
+  details.label-group summary { list-style: none; cursor: pointer; user-select: none; }
+  details.label-group summary::-webkit-details-marker { display: none; }
+  details.label-group:not([open]) .label-group-title { border-bottom: none; border-radius: var(--radius-md); }
+  .label-chevron {
+    flex-shrink: 0;
+    font-size: 14px;
+    color: var(--text-tertiary);
+    transition: transform 0.18s ease;
+  }
+  details[open] .label-chevron { transform: rotate(90deg); }
+  .label-expand-hint {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--text-tertiary);
+    margin-left: auto;
+    margin-right: 4px;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  details[open] .label-expand-hint { display: none; }
 
   .label-row {
     display: flex;
@@ -545,7 +505,23 @@
     font-size: 13px;
     color: var(--text-secondary);
   }
+
 </style>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+  const _dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    flowchart: { curve: 'basis', padding: 14 },
+    themeVariables: {
+      background: 'transparent',
+      lineColor: _dark ? '#5a5a54' : '#b8b6b0',
+      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif',
+      fontSize: '13px'
+    }
+  });
+</script>
 </head>
 <body>
 
@@ -585,59 +561,57 @@
   <div>
     <p class="section-label">Статусы задачи</p>
 
-    <!-- Flowchart -->
-    <div class="flowchart">
+    <!-- Mermaid flowchart -->
+    <div class="mermaid-wrap">
+      <pre class="mermaid">
+flowchart TD
+    D([Draft]) --> B([Backlog]) --> T([Todo]) --> IP([In Progress])
+    IP --> RFR([Ready for Review])
+    RFR --> IR([In Review])
+    IR --> RFT([Ready for Testing])
+    RFT --> IT([In Testing])
+    IT --> RFREG([Ready for Regress])
+    RFREG --> IREG([In Regression])
+    IREG --> RFD([Ready for Deploy])
+    RFD --> DONE([Done])
 
-      <div class="fc-pipeline">
-        <p class="fc-pipeline-label">Основной поток</p>
-        <div class="fc-chips">
-          <span class="flow-chip"><span class="dot" style="background:#B4B2A9"></span>Draft</span>
-          <span class="flow-arrow">→</span>
-          <span class="flow-chip"><span class="dot" style="background:#888780"></span>Backlog</span>
-          <span class="flow-arrow">→</span>
-          <span class="flow-chip"><span class="dot" style="background:#378ADD"></span>Todo</span>
-          <span class="flow-arrow">→</span>
-          <span class="flow-chip"><span class="dot" style="background:#7F77DD"></span>In Progress</span>
-          <span class="flow-arrow">→</span>
-          <span class="flow-chip"><span class="dot" style="background:#1D9E75"></span>Ready for Review</span>
-          <span class="flow-arrow">→</span>
-          <span class="flow-chip"><span class="dot" style="background:#8B81E8"></span>In Review</span>
-          <span class="flow-arrow">→</span>
-          <span class="flow-chip"><span class="dot" style="background:#639922"></span>Ready for Testing</span>
-          <span class="flow-arrow">→</span>
-          <span class="flow-chip"><span class="dot" style="background:#3DAF7A"></span>In Testing</span>
-          <span class="flow-arrow">→</span>
-          <span class="flow-chip"><span class="dot" style="background:#5BA3D9"></span>Ready for Regress</span>
-          <span class="flow-arrow">→</span>
-          <span class="flow-chip"><span class="dot" style="background:#3A87C4"></span>In Regression</span>
-          <span class="flow-arrow">→</span>
-          <span class="flow-chip"><span class="dot" style="background:#5DCAA5"></span>Ready for Deploy</span>
-          <span class="flow-arrow">→</span>
-          <span class="flow-chip"><span class="dot" style="background:#639922"></span>Done</span>
-        </div>
-      </div>
+    IR -.-> FR([Fixes Required])
+    IT -.-> FR
+    FR -.-> RFR
 
-      <div class="fc-fixes-section">
-        <span class="fc-section-label">Возврат</span>
-        <div class="fc-sources">
-          <span class="fc-source"><span class="dot" style="background:#8B81E8"></span>In Review</span>
-          <span class="fc-source"><span class="dot" style="background:#3DAF7A"></span>In Testing</span>
-        </div>
-        <span class="fc-arrow-warn">→</span>
-        <div class="fc-fixes-node">
-          <span class="dot" style="background:#fff; opacity:0.6"></span>
-          Fixes Required
-        </div>
-        <span class="fc-arrow-warn">→</span>
-        <span class="fc-target"><span class="dot" style="background:#1D9E75"></span>Ready for Review</span>
-      </div>
+    style D    fill:#B4B2A9,stroke:#00000025,color:#fff
+    style B    fill:#888780,stroke:#00000025,color:#fff
+    style T    fill:#378ADD,stroke:#00000025,color:#fff
+    style IP   fill:#7F77DD,stroke:#00000025,color:#fff
+    style RFR  fill:#1D9E75,stroke:#00000025,color:#fff
+    style IR   fill:#8B81E8,stroke:#00000025,color:#fff
+    style RFT  fill:#639922,stroke:#00000025,color:#fff
+    style IT   fill:#3DAF7A,stroke:#00000025,color:#fff
+    style RFREG fill:#5BA3D9,stroke:#00000025,color:#fff
+    style IREG fill:#3A87C4,stroke:#00000025,color:#fff
+    style RFD  fill:#5DCAA5,stroke:#00000025,color:#fff
+    style DONE fill:#4A8B22,stroke:#00000025,color:#fff
+    style FR   fill:#EF9F27,stroke:#00000025,color:#fff
 
-      <div class="flow-exits">
-        <span class="flow-exits-label">Выходы из потока:</span>
-        <span class="flow-exit-chip"><span class="dot" style="background:#E24B4A"></span>Blocked</span>
-        <span class="flow-exit-chip"><span class="dot" style="background:#B4B2A9"></span>Canceled</span>
-      </div>
+    linkStyle 11 stroke:#E24B4A,stroke-width:2px,stroke-dasharray:5
+    linkStyle 12 stroke:#E24B4A,stroke-width:2px,stroke-dasharray:5
+    linkStyle 13 stroke:#1D9E75,stroke-width:2px,stroke-dasharray:5
+      </pre>
+    </div>
 
+    <div class="return-note">
+      <span>↺</span>
+      <strong>Fixes Required</strong> — возврат из
+      <span class="chip"><span class="dot" style="background:#8B81E8"></span>In Review</span>
+      и
+      <span class="chip"><span class="dot" style="background:#3DAF7A"></span>In Testing</span>
+      обратно в
+      <span class="chip"><span class="dot" style="background:#1D9E75"></span>Ready for Review</span>
+    </div>
+    <div class="flow-exits" style="margin-bottom:14px">
+      <span class="flow-exits-label">Выходы из потока:</span>
+      <span class="flow-exit-chip"><span class="dot" style="background:#E24B4A"></span>Blocked</span>
+      <span class="flow-exit-chip"><span class="dot" style="background:#B4B2A9"></span>Canceled</span>
     </div>
 
     <div class="status-grid">
@@ -707,48 +681,52 @@
       <i class="ti ti-alert-triangle"></i>
       <p><strong>Fixes Required — высокий приоритет</strong> — брать в работу в первую очередь! <br>Количество возвратов и время в этом статусе влияют на Performance Review.</p>
     </div>
+    <div class="tip">
+      <i class="ti ti-git-merge"></i>
+      <p><strong>Для тестировщиков: конфликты при мерже.</strong> Если задача при мерже для тестов устарела и появились конфликты — скопируй ссылку на задачу и напиши в <code>Slack</code> разработчику, попроси разрулить конфликты. Самостоятельно не мержи.</p>
+    </div>
   </div>
 
   <div>
     <p class="section-label">Метки (Labels)</p>
     <div class="label-grid">
 
-      <div class="label-group">
-        <div class="label-group-title"><i class="ti ti-layout-grid"></i> Stream — к какому продукту или команде относится задача</div>
-        <div class="label-row"><span class="pill pill-purple">Admin</span><span class="label-desc">Административный продукт</span></div>
-        <div class="label-row"><span class="pill pill-purple">App</span><span class="label-desc">Мобильное или веб-приложение</span></div>
-        <div class="label-row"><span class="pill pill-purple">Core Processing</span><span class="label-desc">Бэкенд-процессинг и бизнес-логика</span></div>
+      <details class="label-group">
+        <summary class="label-group-title"><i class="ti ti-layout-grid"></i><span class="pill pill-purple">Stream</span> — к какому продукту или команде относится задача<span class="label-expand-hint">раскрыть</span><i class="ti ti-chevron-right label-chevron"></i></summary>
+        <div class="label-row"><span class="pill pill-purple">Admin</span><span class="label-desc">Бэк офис Bitnbox для менеджмента мерчантов и транзакций</span></div>
+        <div class="label-row"><span class="pill pill-purple">App</span><span class="label-desc">Bitnbox Dashboard, личный кабинет мерчанта</span></div>
+        <div class="label-row"><span class="pill pill-purple">Core Processing</span><span class="label-desc">Бэкенд-процессинг транзакций и менеджмент ликвидности</span></div>
         <div class="label-row"><span class="pill pill-purple">DevOps</span><span class="label-desc">Инфраструктура, деплой, мониторинг</span></div>
         <div class="label-row"><span class="pill pill-purple">Landing Page</span><span class="label-desc">Маркетинговый лендинг</span></div>
-        <div class="label-row"><span class="pill pill-purple">Payment Page</span><span class="label-desc">Страница оплаты</span></div>
-        <div class="label-row"><span class="pill pill-purple">Product Office</span><span class="label-desc">Продуктовые и менеджерские задачи</span></div>
+        <div class="label-row"><span class="pill pill-purple">Payment Page</span><span class="label-desc">Страница оплаты, чекаут</span></div>
+        <div class="label-row"><span class="pill pill-purple">Product Office</span><span class="label-desc">Продуктовые, менеджерские или ресерч задачи</span></div>
         <div class="label-row"><span class="pill pill-purple">QA</span><span class="label-desc">Задачи команды тестирования</span></div>
-        <div class="label-row"><span class="pill pill-purple">Risk check</span><span class="label-desc">Проверка рисков</span></div>
-      </div>
+        <div class="label-row"><span class="pill pill-purple">Risk check</span><span class="label-desc">Compliance, AML, Fraud</span></div>
+      </details>
 
-      <div class="label-group">
-        <div class="label-group-title"><i class="ti ti-tag"></i> Type — что именно делаем</div>
+      <details class="label-group">
+        <summary class="label-group-title"><i class="ti ti-tag"></i><span class="pill pill-teal">Type</span> — что именно делаем<span class="label-expand-hint">раскрыть</span><i class="ti ti-chevron-right label-chevron"></i></summary>
         <div class="label-row"><span class="pill pill-teal">Feature</span><span class="label-desc">Новая функциональность</span></div>
         <div class="label-row"><span class="pill pill-teal">Bug</span><span class="label-desc">Ошибка в работе системы</span></div>
         <div class="label-row"><span class="pill pill-teal">User Story</span><span class="label-desc">Описание без разработки, Story Points = 0</span></div>
         <div class="label-row"><span class="pill pill-teal">Research</span><span class="label-desc">Исследование или анализ подхода</span></div>
         <div class="label-row"><span class="pill pill-teal">Incorrect TX & Balance</span><span class="label-desc">Проблемы с транзакциями и балансом</span></div>
         <div class="label-row"><span class="pill pill-teal">Testing</span><span class="label-desc">Задачи связанные с тестированием</span></div>
-      </div>
+      </details>
 
-      <div class="label-group">
-        <div class="label-group-title"><i class="ti ti-users"></i> Участники — выбираем конкретных людей, вовлечённых в задачу</div>
+      <details class="label-group">
+        <summary class="label-group-title"><i class="ti ti-users"></i><span class="pill pill-blue">Участники</span> — выбираем конкретных людей, вовлечённых в задачу<span class="label-expand-hint">раскрыть</span><i class="ti ti-chevron-right label-chevron"></i></summary>
         <div class="label-row"><span class="pill pill-blue">Owner</span><span class="label-desc">Владелец и инициатор задачи</span></div>
         <div class="label-row"><span class="pill pill-blue">Code Reviewer</span><span class="label-desc">Проводит код-ревью</span></div>
         <div class="label-row"><span class="pill pill-blue">QA</span><span class="label-desc">Тестирует задачу</span></div>
-      </div>
+      </details>
 
-      <div class="label-group">
-        <div class="label-group-title"><i class="ti ti-rocket"></i> Release — к какому релизу привязана задача</div>
+      <details class="label-group">
+        <summary class="label-group-title"><i class="ti ti-rocket"></i><span class="pill pill-amber">Release</span> — к какому релизу привязана задача<span class="label-expand-hint">раскрыть</span><i class="ti ti-chevron-right label-chevron"></i></summary>
         <div class="label-row"><span class="pill pill-amber">Release v0.3</span><span class="label-desc">Задачи третьего релиза</span></div>
         <div class="label-row"><span class="pill pill-amber">Release v0.4</span><span class="label-desc">Задачи четвёртого релиза</span></div>
         <div class="label-row"><span class="pill pill-amber">Release v0.5</span><span class="label-desc">Задачи пятого релиза</span></div>
-      </div>
+      </details>
 
     </div>
   </div>
