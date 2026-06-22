@@ -408,6 +408,28 @@
     color: var(--text-secondary);
   }
 
+  /* Priority */
+  .priority-table {
+    background: var(--bg);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .prio-row {
+    display: grid;
+    grid-template-columns: 26px 80px 1fr;
+    align-items: center;
+    padding: 10px 14px;
+    border-bottom: 0.5px solid var(--border);
+    gap: 0;
+  }
+
+  .prio-row:last-child { border-bottom: none; }
+  .prio-icon { font-size: 16px; }
+  .prio-name { font-size: 13px; font-weight: 700; }
+  .prio-desc { font-size: 12.5px; color: var(--text-secondary); }
+
   /* Hierarchy */
   .hierarchy { display: flex; flex-direction: column; gap: 4px; }
 
@@ -763,6 +785,32 @@ flowchart TD
         <div class="pt-num">5</div>
         <div class="pt-days">5 дней</div>
         <div class="pt-ex">Большая задача — реши, можно ли разбить на части</div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <p class="section-label">Приоритет задачи</p>
+    <div class="priority-table">
+      <div class="prio-row">
+        <div class="prio-icon"><i class="ti ti-alert-circle" style="color:#E24B4A"></i></div>
+        <div class="prio-name" style="color:#E24B4A">Urgent</div>
+        <div class="prio-desc">Критично для работы сервиса в продакшене</div>
+      </div>
+      <div class="prio-row">
+        <div class="prio-icon"><i class="ti ti-arrow-up" style="color:#EF9F27"></i></div>
+        <div class="prio-name" style="color:#EF9F27">High</div>
+        <div class="prio-desc">Топ-приоритеты компании</div>
+      </div>
+      <div class="prio-row">
+        <div class="prio-icon"><i class="ti ti-arrow-right" style="color:#378ADD"></i></div>
+        <div class="prio-name" style="color:#378ADD">Medium</div>
+        <div class="prio-desc">Важно, но можно двигать</div>
+      </div>
+      <div class="prio-row">
+        <div class="prio-icon"><i class="ti ti-arrow-down" style="color:#888780"></i></div>
+        <div class="prio-name" style="color:#888780">Low</div>
+        <div class="prio-desc">Nice-to-have</div>
       </div>
     </div>
   </div>
